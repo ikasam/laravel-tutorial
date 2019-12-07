@@ -40,6 +40,12 @@ services:
       - ./docker/mysql/initdb:/docker-entrypoint-initdb.d:ro
       - ./docker/mysql/conf.d:/etc/mysql/conf.d:ro
 
+  node:
+    build:
+      context: ./docker/node
+    volumes:
+      - ./:/opt/src:rw
+
 volumes:
   db:
   php-fpm:
