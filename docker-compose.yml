@@ -45,6 +45,7 @@ services:
       context: ./docker/node
     volumes:
       - ./:/opt/src:rw
+    command: [npm, run, watch]
 
 volumes:
   db:
