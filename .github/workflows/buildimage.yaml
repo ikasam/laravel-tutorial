@@ -1,14 +1,16 @@
-name: The showdown
+name: Build Image
 on:
-  push: {}
+    push:
 jobs:
-  build_with_gpr:
-    runs-on: ubuntu-latest
-    env:
-      DOCKER_BUILDKIT: "1"
-    steps:
-      - uses: actions/checkout@v2
-      - run: echo ${{ secrets.GITHUB_TOKEN }} | docker login docker.pkg.github.com -u $GITHUB_ACTOR --password-stdin
-      - run: docker pull docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial || true
-      - run: docker build . -f ./docker/php-fpm/Dockerfile -t laravel-tutorial --cache-from=docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial
-      - run: docker tag laravel-tutorial docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial && docker push docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial || true
+    build_with_gpr:
+        runs-on: ubuntu-latest
+        env:
+            DOCKER_BUILDKIT: "1"
+        steps:
+            - uses: actions/checkout@v2
+            - run: echo $GITHUB_ACTOR
+            - run: echo $GITHUB_REPOSITORY
+            - run: echo ${{ secrets.TOKEN_PACKAGE_REGISTRY }} | docker login docker.pkg.github.com -u $GITHUB_ACTOR --password-stdin
+            - run: docker pull docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial || true
+            - run: docker build . -f ./docker/php-fpm/Dockerfile -t laravel-tutorial --cache-from=docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial
+            - run: docker tag laravel-tutorial docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial && docker push docker.pkg.github.com/$GITHUB_REPOSITORY/laravel-tutorial || true
