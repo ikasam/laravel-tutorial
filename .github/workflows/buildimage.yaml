@@ -4,8 +4,6 @@ on:
 jobs:
     build_with_gpr:
         runs-on: ubuntu-latest
-        env:
-            DOCKER_BUILDKIT: "1"
         steps:
             - uses: actions/checkout@v2
             - run: echo $GITHUB_ACTOR
