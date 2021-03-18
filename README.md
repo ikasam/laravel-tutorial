@@ -1,3 +1,8 @@
+!!! This Repository has been archived !!!
+========
+
+今後は [ikasam/laravel-boilerplate](https://github.com/ikasam/laravel-boilerplate) を利用してください
+
 Installation
 ========
 
